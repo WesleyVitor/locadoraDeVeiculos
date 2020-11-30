@@ -1,0 +1,4 @@
+from service.clientesService import cadastrarClientes, deleteCliente, leituraDeClientes, showCliente
+from service.veiculosService import cadastrar_veiculos,delete_veiculos,leitura_veiculos,show_veiculos,update_veiculo
+from service.emprestimoService import cadastrar_emprestimo,deletar_emprestimo,leia_emprestimos
+
