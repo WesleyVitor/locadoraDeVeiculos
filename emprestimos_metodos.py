@@ -1,6 +1,6 @@
 import ast
-from clientesService import pegaClientes
-from veiculosService import pega_veiculos, update_veiculo
+from clientes_metodos import pegaClientes
+import veiculos_metodos as VS
 
 emprestimoModel ="models/emprestimos.txt"
 
@@ -15,8 +15,8 @@ def escreverNoArquivo(dado):
 #Verifica se existe os dados corretos em outros arquivos
 def possoCadastrar(cliente, veiculo, quantidade):
   if cliente in pegaClientes():
-    if veiculo in pega_veiculos():
-      veiculos = pega_veiculos()
+    if veiculo in VS.pega_veiculos():
+      veiculos = VS.pega_veiculos()
       if veiculos[veiculo]>=quantidade:
         return True
   return False
@@ -42,8 +42,9 @@ def cadastrar_emprestimo(cliente, veiculo, quantidade, tempo, valorPorHora, foiP
       "foiPago":foiPago
     }
     escreverNoArquivo(emprestimo)
-    update_veiculo(veiculo, 'decrementar')
+    VS.update_veiculo(veiculo, 'decrementar')
     ###### Escrever no dicionario relatorio 
+    return None
   else:
     return -1
 #Delete
