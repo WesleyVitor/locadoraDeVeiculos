@@ -1,6 +1,7 @@
 import view.menu
 import config.operacoes_SO
 import cliente_service 
+import veiculos_service
 while True:
   print(view.menu.inicial())
   opcaoAdmin = input('ESCOLHA UMA OPÇÃO:')
@@ -8,26 +9,32 @@ while True:
     sairCliente = 'N'
     while sairCliente.upper()=='N':
       config.operacoes_SO.usando_clear()
-      sairCadastro = 'N'
+      #sairCadastro = 'N'
       print(view.menu.view_clientes())
       opcao = input("===DIGITE SUA OPÇÃO===")
+      #
       cliente_service.geral(opcao)
+      #
       print()
       sairCliente = input("===QUE SAIR DA SESSÃO CLIENTE ?(S - N)")
 
-
   elif opcaoAdmin == '2':
-    config.operacoes_SO.usando_clear()
-    print(view.menu.view_veiculos())
+    sair_veiculo = 'N'
+    while sair_veiculo.upper()=='N':
+      config.operacoes_SO.usando_clear()
+      #sairCadastro = 'N'
+      print(view.menu.view_veiculos())
+      opcao = input("===DIGITE SUA OPÇÃO===")
+      #
+      veiculos_service.geral(opcao)
+      #
+      print()
+      sair_veiculo = input("===QUE SAIR DA SESSÃO VEICULOS ?(S - N)")
+
   elif opcaoAdmin == '3':
     config.operacoes_SO.usando_clear()
     print(view.menu.view_emprestimos())
   else:
     print("RESPEITE O MENU!!")
-
-
-# CS.cadastrarClientes('122','Jose')
-# VS.cadastrar_veiculos('Chevrolet',30)
-# ES.cadastrar_emprestimo('122','Chevrolet',1,4,100,False)
 
 

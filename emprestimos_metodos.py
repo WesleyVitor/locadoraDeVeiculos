@@ -42,7 +42,7 @@ def cadastrar_emprestimo(cliente, veiculo, quantidade, tempo, valorPorHora, foiP
       "foiPago":foiPago
     }
     escreverNoArquivo(emprestimo)
-    VS.update_veiculo(veiculo, 'decrementar')
+    VS.update_quantidade_veiculo(veiculo, 'decrementar')
     ###### Escrever no dicionario relatorio 
     return None
   else:

@@ -32,7 +32,7 @@ def cadastrar_veiculos(nome,quantidade):
     return None
 
 #Atualiza a quantidade de veiculos depois do emprestimo
-def update_veiculo(nome, opc):
+def update_quantidade_veiculo(nome, opc):
   veiculos = pega_veiculos()
   if nome in veiculos:
     if opc == 'incrementar':
