@@ -23,7 +23,7 @@ def leituraDeClientes():
 #CREATE
 #Pega os as informacoes do arquivo em formato de dicionario e verifica se não existe
 #um cpf e faz o cadastro de uma nova key(cpf) e manda escrever no arquivo
-def cadastrarClientes(cpf, nome):
+def cadastrar_clientes(cpf, nome):
   clientes = pegaClientes()
   if cpf in clientes:
     return -1
