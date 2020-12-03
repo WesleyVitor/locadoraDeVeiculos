@@ -39,7 +39,8 @@ def cadastrar_emprestimo(cliente, veiculo, quantidade, tempo, valorPorHora, foiP
       "veiculo":veiculo,
       "quantidade":quantidade,
       "totalAPagar":tempo*valorPorHora,
-      "foiPago":foiPago
+      "foiPago":foiPago,
+    
     }
     escreverNoArquivo(emprestimo)
     VS.update_quantidade_veiculo(veiculo, 'decrementar')
@@ -56,3 +57,7 @@ def deletar_emprestimo(cliente):
       return None
   return -1
 
+#SHOW
+#Método para encontrar um emprestimo único
+#Método para atualizar o "atributo" foi pago 
+# Se chamar este método, apagar o emprestimo

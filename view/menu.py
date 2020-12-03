@@ -94,10 +94,7 @@ def view_emprestimos():
   *==*
   3 - APAGAR EMPRESTIMO
   ==
-  *==*
-  4 - LISTAR EMPRESTIMO
-  ==
-
+  
   ===============================
   """
   return texto

@@ -2,6 +2,7 @@ import view.menu
 import config.operacoes_SO
 import cliente_service 
 import veiculos_service
+import emprestimos_service
 while True:
   print(view.menu.inicial())
   opcaoAdmin = input('ESCOLHA UMA OPÇÃO:')
@@ -32,8 +33,18 @@ while True:
       sair_veiculo = input("===QUE SAIR DA SESSÃO VEICULOS ?(S - N)")
 
   elif opcaoAdmin == '3':
-    config.operacoes_SO.usando_clear()
-    print(view.menu.view_emprestimos())
+    sair_emprestimo = 'N'
+    while sair_emprestimo.upper()=='N':
+      config.operacoes_SO.usando_clear()
+      print(view.menu.view_emprestimos())
+      
+      opcao = input("===DIGITE SUA OPÇÃO===")
+      #
+      emprestimos_service.geral(opcao)
+      #
+      print()
+      sair_emprestimo = input("===QUE SAIR DA SESSÃO EMPRESTIMOS ?(S - N)")
+    
   else:
     print("RESPEITE O MENU!!")
 

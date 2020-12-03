@@ -1,1 +1,1 @@
-{'122': {'veiculo': 'Chevrolet', 'quantidade': 1, 'totalAPagar': 400, 'foiPago': False}}
+{'122': {'veiculo': 'Chevrolet', 'quantidade': 2, 'totalAPagar': 900.0, 'foiPago': False}}
