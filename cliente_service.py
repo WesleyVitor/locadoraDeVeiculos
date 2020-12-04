@@ -6,13 +6,15 @@ def serializar(dado):
   global clienteModel
   arquivo = open(clienteModel,'wb')
   pickle.dump(dado, arquivo)
+  arquivo.close()
   return None
 
 #INDEX 
 #Ler o arquivo Clientes
 def deserializar():
   global clienteModel
-  clientes = pickle.load(clienteModel)
+  arquivo = open(clienteModel, 'rb')
+  clientes = pickle.load(arquivo)
   return clientes
 
 #CREATE
@@ -60,13 +62,12 @@ def geral(opcao):
   elif opcao == '2':
     print("===AQUI VOCÊ PODERÁ LISTAR TODOS OS CLIENTES EXISTENTES NO SISTEMA===")
     clientes = deserializar()
-    print(clientes)
     for cpf in clientes:
       print()
       print(""" 
         Nome: %s
         CPF: %s
-       """%(clientes[cpf], cpf))
+       """%(clientes[cpf][0], cpf))
       print()
     return None
   #APAGAR TODOS OS CLIENTES

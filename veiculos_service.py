@@ -1,4 +1,4 @@
-import veiculos_metodos as CV 
+
 import pickle
 VEICULOS_MODEL ="models/veiculos.p"
 #INDEX 
@@ -11,6 +11,7 @@ def serializar(dado):
   global VEICULOS_MODEL
   arquivo = open(VEICULOS_MODEL,'wb')
   pickle.dump(dado, arquivo)
+  arquivo.close()
   
 
 def cadastrar_veiculos(nome,quantidade, valor_por_hora, valor_de_muta_por_hora):
@@ -47,8 +48,8 @@ def geral(opcao):
       print("===AQUI VOCÊ PODERÁ CADASTRAR UM NOVO VEICULO NÃO EXISTENTE===")
       nome_do_veiculo = input("DIGITE O NOME DO VEICULO:")
       quantidade_de_veiculos = input("DIGITE A QUANTIDADE DO VEICULO CORRESPONDENTE:")
-      valor_por_hora = float("DIGITE O VALOR A SER COBRADO POR HORA PARA ESTE VEICULO:")
-      valor_de_muta_por_hora = float("DIGITE O VALOR DA MUTA POR HORA PARA ESTE VEICULO:")
+      valor_por_hora = float(input("DIGITE O VALOR A SER COBRADO POR HORA PARA ESTE VEICULO:"))
+      valor_de_muta_por_hora = float(input("DIGITE O VALOR DA MUTA POR HORA PARA ESTE VEICULO:"))
       retorno = cadastrar_veiculos(nome_do_veiculo, quantidade_de_veiculos, valor_por_hora, valor_de_muta_por_hora)
       if retorno != -1:
         print("VEICULO CADASTRADO COM SUCESSO!!") 
@@ -85,7 +86,7 @@ def geral(opcao):
       print("===AQUI VOCÊ PODERÁ LISTAR O VEICULO EXISTENTES NO SISTEMA===")
       nome = input("DIGITE O CPF DO CLIENTE CORRESPONDENTE:")
       quantidade = show_veiculo(nome)
-      if veiculos != -1:
+      if quantidade != -1:
         print(""" 
         Nome:%s
         Quantidade: %s

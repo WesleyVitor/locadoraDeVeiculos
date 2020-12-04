@@ -1,4 +1,3 @@
-import emprestimos_metodos as EM  
 import cliente_service
 import veiculos_service
 import pickle
@@ -20,6 +19,7 @@ def serializar(dado):
   global emprestimoModel
   arquivo = open(emprestimoModel,'wb')
   pickle.dump(dado, arquivo)
+  arquivo.close()
   return None
 #Atualiza a quantidade de veiculos depois do emprestimo
 def update_quantidade_veiculo(nome, opc):
@@ -78,7 +78,7 @@ def geral(opcao):
           print("EMPRESTIMO CADASTRADO COM SUCESSO!!") 
         else:
           print("DESCULPE, MAS ALGUMA COISA DEU ERRADO")
-          print("PORFAVOR VERIFIQUE SE EXISTE UM VEICULO NESTE NOME, OU SE TEM QUANTIDADE SUFICIENTE PARA ATENDER O CLIENTE OU SE ESTE CLIENTE JÁ ESTÁ CADASTRADO NO SISTEMA")
+          print("PORFAVOR VERIFIQUE SE EXISTE UM VEICULO NESTE NOME,\n OU SE TEM QUANTIDADE SUFICIENTE PARA ATENDER O CLIENTE OU\n SE ESTE CLIENTE JÁ ESTÁ CADASTRADO NO SISTEMA")
       else:
         print("RESPEITE O MENU!!!")
       print()

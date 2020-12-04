@@ -1,3 +1,4 @@
-import emprestimos_metodos
-
-print(emprestimos_metodos.possoCadastrar('122',"Chevrolet",2))
+import pickle
+initial = {}
+arq = open("models/relatorio.p",'wb')
+pickle.dump(initial, arq)
