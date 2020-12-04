@@ -42,9 +42,7 @@ def view_clientes():
   *==*
   3 - APAGAR CLIENTE
   ==
-  *==*
-  4 - LISTAR CLIENTE
-  ==
+  
 
   ===============================
   """
@@ -88,11 +86,9 @@ def view_emprestimos():
   *==*
   1 - CADASTRAR EMPRESTIMO
   ==
+  
   *==*
-  2 - LISTA DE EMPRESTIMOS
-  ==
-  *==*
-  3 - APAGAR EMPRESTIMO
+  2 - APAGAR EMPRESTIMO
   ==
   
   ===============================
