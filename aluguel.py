@@ -102,27 +102,21 @@ def geral():
     elif opcao == '4':
       cpf_cliente = input("Digite o CPF do cliente:")
       if cpf_cliente in emprestimos:
-        
+        aluguel_de_veiculos, dias_uso, Esta_vencido, foi_pago
         print("%s Localizado!"%cpf_cliente)
         print("=== Menu ===")
-        
-        print("1. Dia do vencimento")
-        print("2. Mês do vencimento")
-        print("3. Está vencido")
+        print("1. Dias de Uso")
+        print("2. Está vencido")
         print()
         opcao = input("Digite sua opção:")
         clear()
         if opcao == '1':
-          dia_vencimento = int(input("Digite o novo dia do vencimento:"))
-          emprestimos[cpf_cliente][1]=dia_vencimento
-          print("Dia do vencimento atualizado com sucesso!")
+          dias_uso = int(input("Digite os novos dias de uso:"))
+          emprestimos[cpf_cliente][1]=dias_uso
+          print("Dias de uso atualizado com sucesso!")
         elif opcao == '2':
-          mes_vencimento = int(input("Digite o novo mês do vencimento:"))
-          emprestimos[cpf_cliente][2] = mes_vencimento
-          print("Mês do vencimento atualizado com sucesso!")
-        elif opcao == '3':
           Esta_vencido = input("O aluguel está vencido(s/n)?:")
-          emprestimos[cpf_cliente][3] = not(emprestimos[cpf_cliente][3])
+          emprestimos[cpf_cliente][2] = not(emprestimos[cpf_cliente][2])
           print("Está vencido atualizado com sucesso!")
         else:
           print("Respeite o menu!!")
