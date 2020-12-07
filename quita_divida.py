@@ -75,12 +75,13 @@ def geral():
           emprestimos[cpf_cliente][3] = True
           ##RELATORIO
           codigo = random.random()
-          quita_divida[codigo] = emprestimos[cpf_cliente]
+          
+          quita_divida[codigo] = [cpf_cliente, emprestimos[cpf_cliente], pagar, multa, total_para_pagar]
           serializar_quita_divida(quita_divida)
           del emprestimos[cpf_cliente]
           
           print("OBRIGADO POR ALUGAR NA NOSSA EMPRESA, VOLTE SEMPRE!!")
         else:
-          print("Caso o cliente não pague a multa vai rolar!!")
+          print("Caso o cliente não pague a multa, esta vai aumentar!!")
       else:
-        print("Caso o cliente não pague a multa vai rolar!!")
+        print("Caso o cliente não pague a multa, esta vai aumentar!!")

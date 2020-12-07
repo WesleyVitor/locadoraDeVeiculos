@@ -102,7 +102,6 @@ def geral():
     elif opcao == '4':
       cpf_cliente = input("Digite o CPF do cliente:")
       if cpf_cliente in emprestimos:
-        aluguel_de_veiculos, dias_uso, Esta_vencido, foi_pago
         print("%s Localizado!"%cpf_cliente)
         print("=== Menu ===")
         print("1. Dias de Uso")
@@ -122,4 +121,5 @@ def geral():
           print("Respeite o menu!!")
       else:
         print("%s não foi localizado no sistema!"%cpf_cliente)
+      sair = input("Quer sair da sessão veiculo(s/n)")
         
