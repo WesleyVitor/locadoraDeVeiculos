@@ -1,16 +1,4 @@
-'''
-Procurar o cliente em que o emprestimo está associado
-se encontrar
-  mostrar o emprestimo
-  verificar quantos dias de uso do aluguel
-  pedir quantos dias de atraso
 
-  pagar = dias de uso * diaria_veiculo1 + ..... +
-  multa = dias de atraso * multa_veiculo 1+ .....+
-  total = pagar + multa
-
-  apagar o emprestimo se elemento 'foi pago' for True
-'''
 import random
 import pickle
 def deserializar_emprestimos():
@@ -20,11 +8,12 @@ def deserializar_veiculos():
   arquivo = open("db_veiculos.txt",'rb')
   return pickle.load(arquivo)
 def deserializar_quita_divida():
-  arquivo = open("db_quita_divida.txt",'rb')
+  arquivo = open("db_quita_dividas.txt",'rb')
   return pickle.load(arquivo)
 def serializar_quita_divida(dados):
   arquivo = open("db_quita_dividas.txt",'wb')
   pickle.dump(dados, arquivo)
+  arquivo.close()
 
 def geral():
   sair = 'n'
@@ -73,15 +62,16 @@ def geral():
         confirmar = input("Cliente pagou(s/n)?")
         if confirmar.lower() == 's':
           emprestimos[cpf_cliente][3] = True
+          emprestimos[cpf_cliente][2] = True
           ##RELATORIO
-          codigo = random.random()
-          
-          quita_divida[codigo] = [cpf_cliente, emprestimos[cpf_cliente], pagar, multa, total_para_pagar]
-          serializar_quita_divida(quita_divida)
-          del emprestimos[cpf_cliente]
-          
-          print("OBRIGADO POR ALUGAR NA NOSSA EMPRESA, VOLTE SEMPRE!!")
         else:
           print("Caso o cliente não pague a multa, esta vai aumentar!!")
       else:
         print("Caso o cliente não pague a multa, esta vai aumentar!!")
+    if emprestimos[cpf_cliente][3]:
+      codigo = random.random()  
+      quita_divida[codigo] = [cpf_cliente, emprestimos[cpf_cliente], pagar, multa, total_para_pagar]
+      serializar_quita_divida(quita_divida)
+      del emprestimos[cpf_cliente]
+      print("OBRIGADO POR ALUGAR NA NOSSA EMPRESA, VOLTE SEMPRE!!")
+    sair = input("Deseja sair da sessão(s/n)?")

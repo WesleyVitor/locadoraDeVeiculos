@@ -19,9 +19,11 @@ def deserializar_veiculos():
 def serializar(dados):
   arquivo = open("db_emprestimos.txt",'wb')
   pickle.dump(dados, arquivo)
+  arquivo.close()
 def serializar_veiculo(dados):
   arquivo = open("db_veiculos.txt",'wb')
   pickle.dump(dados, arquivo)
+  arquivo.close()
 
 def geral():
   emprestimos = deserializar_emprestimos()
@@ -54,7 +56,7 @@ def geral():
           print("Desculpe, mas este veiculo não foi cadastrado!")
           continue
         aluguel_de_veiculos.append(placa_veiculo)
-        veiculos[placa_veiculo][0]+=1
+        veiculos[placa_veiculo][0]-=1
         cont+=1
       dias_uso = int(input("Digite quantos dias o cliente vai ficar com o veiculo:"))
       Esta_vencido = False
@@ -71,6 +73,7 @@ def geral():
       serializar_veiculo(veiculos)
       serializar(emprestimos)
       print("Aluguel cadastrado com sucesso!")
+      sair = input("Quer sair da sessão veiculo(s/n)")
     elif opcao == '2':
       cpf_cliente = input("Digite o CPF do cliente deste Aluguel:")
       if cpf_cliente in emprestimos:
@@ -90,7 +93,8 @@ def geral():
         print("===")
         print()
       else:
-        print("Veiculo não encontrado!")
+        print("Emprestimo não encontrado!")
+      sair = input("Quer sair da sessão veiculo(s/n)")
     elif opcao == '3':
       cpf_cliente = input("Digite o CPF do cliente deste Aluguel:")
       if cpf_cliente in emprestimos:
@@ -98,6 +102,7 @@ def geral():
         serializar(emprestimos)
       else:
         print("Emprestimo não cadastrado no sistema!")
+      sair = input("Quer sair da sessão veiculo(s/n)")
 
     elif opcao == '4':
       cpf_cliente = input("Digite o CPF do cliente:")

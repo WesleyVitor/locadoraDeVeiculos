@@ -11,6 +11,7 @@ def clear():
 def serializar(dados):
   arquivo = open("db_veiculos.txt",'wb')
   pickle.dump(dados, arquivo)
+  arquivo.close()
 
 def deserializar():
   arquivo = open("db_veiculos.txt",'rb')
