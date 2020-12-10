@@ -6,7 +6,7 @@ Este repositório tem o objetivo de guardar o projeto da matéria de  algoritmos
  - [x] CRUD de Veiculos
  - [x] CRUD de Emprestimos
  - [x] Possibilidade de quitar a Divida
- - [x] Históico de alugueis de veiculos 
+ - [x] Histórico de alugueis de veiculos 
  - [x] Relatório financeiro
 
 
