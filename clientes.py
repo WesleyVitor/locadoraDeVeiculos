@@ -8,17 +8,29 @@ def clear():
   elif platform.system() == 'Windows':
     return os.system('cls')
 
-def serializar(dados):
+def verificar_arquivo():
+  try:
+    arquivo = open("db_clientes.txt", 'rb')
+    arquivo.close()
+  except:
+    arquivo = open('db_clientes.txt','wb')
+    pickle.dump({}, arquivo)
+    arquivo.close()
+
+def gravar_clientes(dados):
   arquivo = open("db_clientes.txt",'wb')
   pickle.dump(dados, arquivo)
   arquivo.close()
 
-def deserializar():
+def pegar_clientes():
   arquivo = open("db_clientes.txt",'rb')
-  return pickle.load(arquivo)
+  clientes = pickle.load(arquivo)
+  arquivo.close()
+  return clientes
 
 
 def geral(): 
+
   sair = 'n'
   while sair == 'n':
     print("===MENU Veiculos===")
@@ -28,10 +40,12 @@ def geral():
     print("4. ATUALIZAR CLIENTE")
     print("5. PROCURAR VEICULO")
     print("===================")
+    
     opcao = input("DIGITE SUA OPÇÃO:")
     clear()
+    verificar_arquivo()
     if opcao == '1':
-      clientes = deserializar()
+      clientes = pegar_clientes()
       print("Preencha as informações de cadastro:")
       cpf = input("Digite o CPF do cliente:")
       if cpf in clientes:
@@ -47,13 +61,13 @@ def geral():
           email = input("Digite o email do cliente:")
           
           clientes[cpf] = [nome_completo, email, rua, bairro, idade, profissao]
-          serializar(clientes)
+          gravar_clientes(clientes)
           print("== Cliente cadastrado com sucesso !!")
         except:
           print("Desculpe, mas ocorreu algum problema!!")
         
     elif opcao == '2':
-      clientes = deserializar()
+      clientes = pegar_clientes()
       if len(clientes)>0:
         for cliente in clientes:
           print()
@@ -71,17 +85,17 @@ def geral():
         print("Não existe cliente no sistema!!")
 
     elif opcao == '3':
-      clientes = deserializar()
+      clientes = pegar_clientes()
       cpf = input("Digite o CPF do cliente que quer deletar:")
       if cpf in clientes:
         del clientes[cpf]
-        serializar(clientes)
+        gravar_clientes(clientes)
         print("%s Deletado com sucesso!!"%cpf)
       else:
         print("Desculpe, mas este CPF não existe no sistema!!")
 
     elif opcao == '4':
-      clientes = deserializar()
+      clientes = pegar_clientes()
       cpf = input("Digite o CPF do cliente no qual você quer atualizar informações:")
       if cpf in clientes:
         print("%s Localizado!"%cpf)
@@ -98,39 +112,39 @@ def geral():
         if opcao == '1':
           nome_completo = int(input("Digite o novo nome completo do cliente:"))
           clientes[cpf][0] = nome_completo
-          serializar(clientes)
+          gravar_clientes(clientes)
           print("Nome completo Atualizado com sucesso!")
         elif opcao == '2':
           email = input("Digite o novo EMAIL do cliente:") 
           clientes[cpf][1] = email
-          serializar(clientes)
+          gravar_clientes(clientes)
           print("Email Atualizado com sucesso!")
         elif opcao == '3':
           rua = input("Digite a nova RUA do cliente:")
           clientes[cpf][2] = rua
-          serializar(clientes)
+          gravar_clientes(clientes)
           print("Rua Atualizada com sucesso!")
         elif opcao == '4':
           bairro = input("Digite o novo BAIRRO do cliente:")
           clientes[cpf][3] = bairro
-          serializar(clientes)
+          gravar_clientes(clientes)
           print("Bairro Atualizado com sucesso!")
         elif opcao == '5':
           idade = float(input("Digite a nova IDADE do cliente:"))
           clientes[cpf][4] = idade
-          serializar(clientes)
+          gravar_clientes(clientes)
           print("Idade Atualizada com sucesso!")
         elif opcao == '6':
           profissao = float(input("Digite a nova PROFISSÃO do cliente:"))
           clientes[cpf][5] = profissao
-          serializar(clientes)
+          gravar_clientes(clientes)
           print("Profissão Atualizado com sucesso!")
         else:
           print("Respeite o menu!!")
       else:
         print("%s não foi localizado no sistema!"%cpf)
     elif opcao == '5':
-      clientes = deserializar()
+      clientes = pegar_clientes()
       cpf = input("Digite o CPF do cliente:")
       if cpf in clientes:
         print()

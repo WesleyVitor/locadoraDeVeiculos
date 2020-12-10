@@ -1,21 +1,36 @@
 
 import random
 import pickle
+
+def verificar_arquivo(nome_arquivo):
+  try:
+    arquivo = open(nome_arquivo, 'rb')
+    arquivo.close()
+  except:
+    arquivo = open(nome_arquivo,'wb')
+    pickle.dump({}, arquivo)
+    arquivo.close()
+
 def deserializar_emprestimos():
+  verificar_arquivo("db_emprestimos.txt")
   arquivo = open("db_emprestimos.txt",'rb')
   return pickle.load(arquivo)
 def deserializar_veiculos():
+  verificar_arquivo("db_veiculos.txt")
   arquivo = open("db_veiculos.txt",'rb')
   return pickle.load(arquivo)
 def deserializar_quita_divida():
+  verificar_arquivo("db_quita_dividas.txt")
   arquivo = open("db_quita_dividas.txt",'rb')
   return pickle.load(arquivo)
 def serializar_quita_divida(dados):
+  verificar_arquivo("db_quita_dividas.txt")
   arquivo = open("db_quita_dividas.txt",'wb')
   pickle.dump(dados, arquivo)
   arquivo.close()
 
 def geral():
+  
   sair = 'n'
   while sair == 'n':
     emprestimos = deserializar_emprestimos()

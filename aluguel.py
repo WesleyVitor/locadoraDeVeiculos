@@ -7,20 +7,41 @@ def clear():
     return os.system('clear')
   elif platform.system() == 'Windows':
     return os.system('cls')
+
+def verificar_arquivo(nome_arquivo):
+  try:
+    arquivo = open(nome_arquivo, 'rb')
+    arquivo.close()
+  except:
+    arquivo = open(nome_arquivo,'wb')
+    pickle.dump({}, arquivo)
+    arquivo.close()
+
 def deserializar_emprestimos():
+  verificar_arquivo("db_emprestimos.txt")
   arquivo = open("db_emprestimos.txt",'rb')
-  return pickle.load(arquivo)
+  emprestimos = pickle.load(arquivo)
+  arquivo.close()
+  return emprestimos
 def deserializar_clientes():
+  verificar_arquivo("db_clientes.txt")
   arquivo = open("db_clientes.txt",'rb')
-  return pickle.load(arquivo)
+  clientes = pickle.load(arquivo)
+  arquivo.close()
+  return clientes
 def deserializar_veiculos():
+  verificar_arquivo("db_veiculos.txt")
   arquivo = open("db_veiculos.txt",'rb')
-  return pickle.load(arquivo)
+  veiculos = pickle.load(arquivo)
+  arquivo.close()
+  return veiculos
 def serializar(dados):
+  verificar_arquivo("db_emprestimos.txt")
   arquivo = open("db_emprestimos.txt",'wb')
   pickle.dump(dados, arquivo)
   arquivo.close()
 def serializar_veiculo(dados):
+  verificar_arquivo("db_veiculos.txt")
   arquivo = open("db_veiculos.txt",'wb')
   pickle.dump(dados, arquivo)
   arquivo.close()
