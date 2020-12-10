@@ -48,11 +48,13 @@ def geral():
   sair = 'n'
   while sair == 'n':
     print("== Menu ===========")
-    print("1. Clientes")
-    print("2. Veiculos")
-    print("3. Alugueis")
-    print("4. Quitar Dividas")
-    print("5. Relatório")
+    print("|")
+    print("| 1. Clientes")
+    print("| 2. Veiculos")
+    print("| 3. Alugueis")
+    print("| 4. Quitar Dividas")
+    print("| 5. Relatório")
+    print("|-----------------")
     opcao = input("Digite a sua opção:")
     clear()
     if opcao == '1':
