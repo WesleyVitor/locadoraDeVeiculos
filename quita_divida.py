@@ -1,7 +1,7 @@
 import random
 import pickle
 from arquivos_gerais import verificar_arquivo, pegar_emprestimos, pegar_veiculos, pegar_quita_divida, gravar_quita_divida
-
+from datetime import datetime, timedelta
 def geral():
   sair = 'n'
   while sair == 'n':
@@ -29,12 +29,21 @@ def geral():
     print("Dias de uso :",emprestimos[cpf_cliente][1])
     print("Está vencido?:",emprestimos[cpf_cliente][2])
     print("Foi Pago?:",emprestimos[cpf_cliente][3])
+    print("Vencimento:",emprestimos[cpf_cliente][4])
     print("===")
     print()
-    dias_atraso = int(input("Digite quantos dias foi atrasado até a entrega:"))  
-    for placa_veiculo in emprestimos[cpf_cliente][0]:
-      pagar += emprestimos[cpf_cliente][1]*veiculos[placa_veiculo][4]
-      multa += dias_atraso * veiculos[placa_veiculo][5]
+    vencimento = emprestimos[cpf_cliente][4]
+    data_atual = datetime.now()
+    dias_atraso = data_atual - vencimento
+    data_lista_vencimento = str(dias_atraso).split()
+    dias_atraso = int(data_lista_vencimento[0])
+    if dias_atraso>0:
+      for placa_veiculo in emprestimos[cpf_cliente][0]:
+        pagar += emprestimos[cpf_cliente][1]*veiculos[placa_veiculo][4]
+        multa += dias_atraso * veiculos[placa_veiculo][5]
+    else:
+      for placa_veiculo in emprestimos[cpf_cliente][0]:
+        pagar += emprestimos[cpf_cliente][1]*veiculos[placa_veiculo][4]
     total_para_pagar = pagar + multa
     print()
     print("==PAGAMENTO==")

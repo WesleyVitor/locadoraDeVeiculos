@@ -3,7 +3,7 @@ import os
 import platform
 from arquivos_gerais import pegar_emprestimos,verificar_arquivo,pegar_clientes, pegar_veiculos, gravar_emprestimos, gravar_veiculos
 from limpa_tela import clear
-
+from datetime import datetime, timedelta
 def cadastrar_emprestimo(emprestimos, clientes, veiculos):
   continuar = 's'
   while continuar.lower()=='s':
@@ -29,6 +29,8 @@ def cadastrar_emprestimo(emprestimos, clientes, veiculos):
         veiculos[placa_veiculo][0]-=1
         cont+=1
       dias_uso = int(input("Digite quantos dias o cliente vai ficar com o veiculo:"))
+      data_vencimento = datetime.now() + timedelta(days=dias_uso)
+      
       Esta_vencido = False
       print("O cliente vai pagar agora(1) ou depois(2):")
       escolha_pagar = input("Digite sua opção:")
@@ -40,7 +42,8 @@ def cadastrar_emprestimo(emprestimos, clientes, veiculos):
         print("Respeite o menu!")
         continuar = input("Quer continuar na sessão cadastrar emprestimo?(s/n)")
         continue
-      emprestimos[cpf_cliente] = [aluguel_de_veiculos, dias_uso, Esta_vencido, foi_pago]
+      #emprestimos[cpf_cliente] = [aluguel_de_veiculos, dias_uso, Esta_vencido, foi_pago]
+      emprestimos[cpf_cliente] = [aluguel_de_veiculos, dias_uso, Esta_vencido, foi_pago, data_vencimento]
       gravar_veiculos(veiculos)
       gravar_emprestimos(emprestimos)
       print("Aluguel cadastrado com sucesso!")
