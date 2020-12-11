@@ -1,49 +1,22 @@
-
 import random
 import pickle
-
-def verificar_arquivo(nome_arquivo):
-  try:
-    arquivo = open(nome_arquivo, 'rb')
-    arquivo.close()
-  except:
-    arquivo = open(nome_arquivo,'wb')
-    pickle.dump({}, arquivo)
-    arquivo.close()
-
-def deserializar_emprestimos():
-  verificar_arquivo("db_emprestimos.txt")
-  arquivo = open("db_emprestimos.txt",'rb')
-  return pickle.load(arquivo)
-def deserializar_veiculos():
-  verificar_arquivo("db_veiculos.txt")
-  arquivo = open("db_veiculos.txt",'rb')
-  return pickle.load(arquivo)
-def deserializar_quita_divida():
-  verificar_arquivo("db_quita_dividas.txt")
-  arquivo = open("db_quita_dividas.txt",'rb')
-  return pickle.load(arquivo)
-def serializar_quita_divida(dados):
-  verificar_arquivo("db_quita_dividas.txt")
-  arquivo = open("db_quita_dividas.txt",'wb')
-  pickle.dump(dados, arquivo)
-  arquivo.close()
+from arquivos_gerais import verificar_arquivo, pegar_emprestimos, pegar_veiculos, pegar_quita_divida, gravar_quita_divida
 
 def geral():
-  
   sair = 'n'
   while sair == 'n':
-    emprestimos = deserializar_emprestimos()
-    veiculos = deserializar_veiculos()
-    quita_divida = deserializar_quita_divida()
+    emprestimos = pegar_emprestimos()
+    veiculos = pegar_veiculos()
+    quita_divida = pegar_quita_divida()
     pagar = 0
     multa = 0
     cpf_cliente = input("Digite o cpf do cliente associado ao emprestimo:")
     
     if not(cpf_cliente in emprestimos):
       print("Não foi encontrado emprestimo associado a este CPF")
+      print()
+      sair = input("Deseja sair da sessão de quitar dividas?(s/n)?")
       continue
-    #[aluguel_de_veiculos, dias_uso, Esta_vencido, foi_pago]
     print()
     print("===")
     print("Cpf do cliente",cpf_cliente)
@@ -51,7 +24,6 @@ def geral():
     print("====")
     for placa_veiculo in emprestimos[cpf_cliente][0]:
       print(placa_veiculo)
-      
       print("====")
     print()
     print("Dias de uso :",emprestimos[cpf_cliente][1])
@@ -86,7 +58,8 @@ def geral():
     if emprestimos[cpf_cliente][3]:
       codigo = random.random()  
       quita_divida[codigo] = [cpf_cliente, emprestimos[cpf_cliente], pagar, multa, total_para_pagar]
-      serializar_quita_divida(quita_divida)
+      gravar_quita_divida(quita_divida)
       del emprestimos[cpf_cliente]
       print("OBRIGADO POR ALUGAR NA NOSSA EMPRESA, VOLTE SEMPRE!!")
+    print()
     sair = input("Deseja sair da sessão(s/n)?")
