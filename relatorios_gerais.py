@@ -1,5 +1,5 @@
 from arquivos_gerais import verificar_arquivo, pegar_veiculos, pegar_quita_divida, pegar_clientes, pegar_emprestimos
-
+from datetime import datetime
 def gerar_relatorio_veiculos():
   verificar_arquivo("db_veiculos.txt")
   lista_veiculos = pegar_veiculos()
@@ -14,10 +14,54 @@ def gerar_relatorio_veiculos():
     print("Multa:",lista_veiculos[placa][5])
   print("==========================================")
 
+def pegar_dividas_do_mes():
+  verificar_arquivo("db_quita_dividas.txt")
+  dividas = pegar_quita_divida()
+  data_atual = datetime.now()
+  lista_data = str(data_atual).split()
+  mes_atual = lista_data[5:7]
+  dividas_mes = {}
+  for divida in dividas:
+    data_vencimento = dividas[divida][1][4]
+    lista_data_vencimento = str(data_vencimento).split()
+    mes_vencimento = lista_data_vencimento[5:7]
+    if mes_vencimento == mes_atual:
+      dividas_mes[divida] = dividas[divida]
+  
+  return dividas_mes
 
+def dividas_do_mes():
+  dividas = pegar_dividas_do_mes()
+  if len(dividas)>0:
+    print("DIVIDAS QUITADAS DO MÊS:")
+    print("## Valor: %d"%len(dividas))
+    print("==========================")
+    print("FATURAMENTO DA EMPRESA:")
+    faturamento=0
+    for divida in dividas:
+      faturamento += dividas[divida][4]
+    print("## Valor:R$ %.3f"%faturamento)
+    print("===========================================")
+    print("-------------------------------------------")
+    for divida in dividas:
+        print("-----------")
+        print("# Cliente Associado:",dividas[divida][0])
+        print("# Veiculos Alugados:")
+        veiculos_alugados = dividas[divida][1][0]
+        for veiculo in veiculos_alugados:
+          print("##",veiculo)
+        print("# Dias de aluguel:",dividas[divida][1][1])
+        print("# Total a pago:R$ %.2f"%dividas[divida][4])
+        print("# Multa por atraso: R$ %.2f"%dividas[divida][3])
+        print("==========================================")
+    print("==========================================")
+  else:
+    print("Não existe dividas quitadas!")
+    
 def gerar_relatorio_dividas_quitadas():
   verificar_arquivo("db_quita_dividas.txt")
   dividas = pegar_quita_divida()
+
   if len(dividas)>0:
     print("TOTAL DE DIVIDAS QUITADAS:")
     print("## Valor: %d"%len(dividas))
@@ -78,18 +122,21 @@ def gerar_relatorio():
     print("======== PyRent-a-Car ========")
     print("==============================")
     print("==============================")
-    print("1. Dividas quitadas")
-    print("2. Clientes")
-    print("3. Veiculos")
-    print("4. Emprestimos")
+    print("1. Todas as Dividas quitadas")
+    print("2. Dividas quitadas do mês")
+    print("3. Clientes")
+    print("4. Veiculos")
+    print("5. Emprestimos")
     opcao = input("Digite sua opção:")
     if opcao == '1':
       gerar_relatorio_dividas_quitadas()
     elif opcao == '2':
-      gerar_relatorio_clientes()
+      dividas_do_mes()
     elif opcao == '3':
-      gerar_relatorio_veiculos()
+      gerar_relatorio_clientes()
     elif opcao == '4':
+      gerar_relatorio_veiculos()
+    elif opcao == '5':
       gerar_relatorio_emprestimos_ativos()
     else:
       print("Opção inválida!")
