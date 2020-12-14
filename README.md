@@ -8,6 +8,9 @@ Este repositório tem o objetivo de guardar o projeto da matéria de  algoritmos
  - [x] Possibilidade de quitar a Divida
  - [x] Histórico de alugueis de veiculos 
  - [x] Relatório financeiro
+ - [x] Relatório de Dividas quitadas
+ - [x] Relatório de clientes
+ - [x] Relatório de veiculos
 
 
 ## Como Rodar estes algoritmos
