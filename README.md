@@ -18,6 +18,9 @@ Este repositório tem o objetivo de guardar o projeto da matéria de  algoritmos
 * Clone este repositório
   - git clone https://github.com/WesleyVitor/locadoraDeVeiculos.git 
 
+* Entre no diretório
+  - cd locadoraDeVeiculos
+
 * Rodar o arquivo principal
   - python3 main.py
 
